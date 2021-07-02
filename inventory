@@ -1,0 +1,6 @@
+controller ansible_connection=local
+node1 ansible_host=10.10.10.100
+node2 ansible_host=10.10.10.101
+
+[nodes]
+node[1:2]
