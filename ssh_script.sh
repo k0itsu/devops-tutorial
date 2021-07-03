@@ -4,35 +4,8 @@
 mkdir -pm 700 /home/vagrant/.ssh
 chown -R vagrant:vagrant /home/vagrant/.ssh
 
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDoWzDmF0MQsLfnyf8gbEtKeK8zCm6vGdSDJifQqeQZoU9AE4bFiCQ90e5VsMHhkoYfdKFEBc/QdbXVaEDS3g/7UdYRXjFvQ1yT7QXSyxowVFgXsN+Ny88FGR71d8C0GSJpiAKtkbadVGo86riaEhNTuGynpQ0UMNMWU+L4mSz7MGnED4Wc31yEcxRsHCF4UCUvb6I32GT69o63hjHnfrjhqTFo6xsE2Rhst7Epk5OGXeUshbWz2U2qMWygl+8WqWWSXpEdJuvdq7LPJHPxg0FcQVkcIe3U9b5vMrtshegD8wdI9tvmz+FadycSbRZKIdMwJXP2JtS29fOYKYZMB7+j vagrant@localhost.localdomain
-" >> /home/vagrant/.ssh/authorized_keys
-echo "-----BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEA6Fsw5hdDELC358n/IGxLSnivMwpurxnUgyYn0KnkGaFPQBOG
-xYgkPdHuVbDB4ZKGH3ShRAXP0HW11WhA0t4P+1HWEV4xb0Nck+0F0ssaMFRYF7Df
-jcvPBRke9XfAtBkiaYgCrZG2nVRqPOq4mhITU7hsp6UNFDDTFlPi+Jks+zBpxA+F
-nN9chHMUbBwheFAlL2+iN9hk+vaOt4Yx53644akxaOsbBNkYbLexKZOThl3lLIW1
-s9lNqjFsoJfvFqllkl6RHSbr3auyzyRz8YNBXEFZHCHt1PW+bzK7bIXoA/MHSPbb
-5s/hWncnEm0WSiHTMCVz9ibUtvXzmCmGTAe/owIDAQABAoIBADNLjmv9Tqzslmzx
-RwVdYvG52tOlxfGZ/jRFxBxopRaTae93YBVTjMyo/7ijIOovcrSXBtMBhXM7yTyn
-m0fyBg0xb9S9uqQZduKhPNvgQpPQyvHP9kpTaAx0E0WVflFECzjI8e5ncK0i6aEx
-IDfDLckZucL4yP5gGPmg40aGaku5ZKlvhxvx3eka396JTprgpcU+bBsG30IMg4rA
-9V4Lo7spO1wImlWB6tJ1tERMBe0gVvr08lYlSvNDJcWoAqdjF6lxlhEpa6e4BEci
-xeGZmeR6Pd+z/RSw6Lrp7MWiksxD2U9d6Bnzi4I31+aBIuLxTCFxawQE1KeLAoh3
-jFAin8ECgYEA+YgePWNeUHKakGGElOSPKnRgKtp+9up954NXzvL6pWhdUZYAazW9
-z0LeMOyPaUhk+SJv3VO7aUcPP72jrbUHghqyELkv+4i01lOAfyCiGRQsAQGm6cIe
-KMTajtsfTWMBp71byL3SK2bQWabNKN/YYiO9wn4fsq9Sb2DqO8Qou9sCgYEA7mEY
-1jZfZTItSgzWBmGD9VF1ODS90mjgK+xnknbMYOzJh4rv9AAmiJKpLs88ds1loiko
-XaoVzd7QewKPUnMDOT1U4230BcHTMJS2Vx5Rj13hWjE83CS2pfJ9aIYWjDXzwHPo
-zBpGlcmxPWsuhKn7mnmoO8/ve0XbiPeU/PcCedkCgYABF76CKFA+a/IPVc391O5n
-kjDlnyVVMXuxqtqUlm3QkZ9u/wgrcAXPxYwxjKeoH2AJ00PIJVi5wkzny43O8e8B
-e9pxxk3WfSfFlIIIjH0JPRRgQMCZX3dAWHRYkc8WSKu2L1cajvI/rGiXK+rUFf7d
-lyh6lJDQ+IGU6Ui9UEOZZwKBgC/9qExoAeiTo36G+wep1jErRxgbtiOILalqHKfl
-9tuEkEYTeJ988EUKkbj0y813KIDvHEtPFLivpPU+3K/Sq9F4QYDQABKwpN3g8pyz
-Y+QjGF1aEFCZq5PZL9o9NIjhy8LxEusUVyWMx3v/+guHVToSSAZSpHoC5GG8xmfv
-KrZxAoGBAJ8zaSryu6X3eW3DQ+yHmwCEXzjGZP/FuztOUun8vOP3dsSI7oqN/cuT
-wTE7eiyCuMXojmFiKlyENr9asLgUaha45ziZKj2+Hq+un1lfzWYwXzD2NQtWOSdu
-7xeP0jtUx6uAJS52o0E6d8+k1ItUw7AGIVigejCnnxXjPQjtzHw9
------END RSA PRIVATE KEY-----" > /home/vagrant/.ssh/id_rsa
+curl --insecure https://raw.githubusercontent.com/k0itsu/devops-tutorial/main/ssh_files/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys
+curl --insecure https://raw.githubusercontent.com/k0itsu/devops-tutorial/main/ssh_files/id_rsa > /home/vagrant/.ssh/id_rsa
 
 chmod 644 /home/vagrant/.ssh/authorized_keys
-chmod 644 /home/vagrant/.ssh/id_rsa
+chmod 600 /home/vagrant/.ssh/id_rsa

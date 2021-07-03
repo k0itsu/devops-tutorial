@@ -7,6 +7,8 @@ Trying to run his vagrant config on my home machine wouldn't work,
 so I took the opportunity to try and recreate his coursework as best
 as I could.
 
+k3s-ansible playbooks/roles are from https://github.com/k3s-io/k3s-ansible
+
 TODO:
 - set up k3s using ansible
 - import ansible playbooks to install:
@@ -19,3 +21,9 @@ TODO:
 - Add hostnames to virtualbox vm's?
 - Add requirements for this project.
 - Hello World!
+
+
+VERSIONS:
+- ansible 2.9.21
+- vagrant
+- virtualbox
