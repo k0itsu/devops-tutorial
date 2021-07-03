@@ -1,6 +1,0 @@
----
-- name: ping hosts
-  hosts: all
-  tasks:
-    - name: Pinging Host
-      action: ping

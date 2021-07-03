@@ -10,8 +10,8 @@ Vagrant.configure("2") do |config|
   # This will allow vbguest plugin to work on centos/7
   config.vbguest.installer_options = { allow_kernel_upgrade: true }
 
-  config.vm.define "master" do |machine|
-    machine.vm.network "private_network", ip: "10.10.10.10"
+  config.vm.define "k3s_master" do |machine|
+    machine.vm.network "private_network", ip: "10.10.10.20"
   end
 
   config.vm.define "node1" do |machine|
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
     machine.vm.network "private_network", ip: "10.10.10.101"
   end
 
-  config.vm.define "ansible_controller" do |machine|
+  config.vm.define "ansible" do |machine|
     machine.vm.network "private_network", ip: "10.10.10.10"
 
     machine.vm.provision :ansible_local do |ansible|

@@ -20,10 +20,9 @@ TODO:
   base box.
 - Add hostnames to virtualbox vm's?
 - Add requirements for this project.
-- Hello World!
 
 
 VERSIONS:
 - ansible 2.9.21
-- vagrant
-- virtualbox
+- vagrant 2.2.16
+- virtualbox 6.2.22
