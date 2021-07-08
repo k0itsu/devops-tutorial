@@ -9,14 +9,14 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant"
   
   # This shell script will copy the public and private key for ansible
-  config.vm.provision "shell", path: "/scripts/ssh_script.sh"
+  config.vm.provision "shell", path: "scripts/ssh_script.sh"
   
   # This will allow vbguest plugin to work on centos/7
   # config.vbguest.installer_options = { allow_kernel_upgrade: true }
 
   config.vm.define "ansible" do |machine|
     machine.vm.network "private_network", ip: "10.10.10.10"
-
+    machine.vm.provision "shell", path: "scripts/ansible.sh"
     # machine.vm.provision :ansible_local do |ansible|
     #   ansible.playbook = "example.yml"
     #   ansible.verbose = false

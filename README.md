@@ -25,6 +25,7 @@ TODO:
   base box.
 - Add hostnames to virtualbox vm's?
 - Add requirements for this project.
+    - scripts/ansible.sh : change this to install 2.9.21 explicitly
 
 
 VERSIONS:
