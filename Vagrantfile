@@ -18,28 +18,21 @@ Vagrant.configure("2") do |config|
     machine.vm.hostname = "ansible"
     machine.vm.network "private_network", ip: "10.10.10.10"
     machine.vm.provision "shell", path: "scripts/ansible.sh"
-    # machine.vm.provision :ansible_local do |ansible|
-    #   ansible.playbook = "example.yml"
-    #   ansible.verbose = false
-    #   ansible.install = true
-    #   # ansible.limit = "all"
-    #   ansible.inventory_path = "inventory"
-    # end
   end
 
   config.vm.define "controlplane" do |machine|
-    machine.vm.network = "controlplane"
+    machine.vm.hostname = "controlplane"
     machine.vm.network "private_network", ip: "10.10.10.20"
   end
 
   config.vm.define "node1" do |machine|
-    machine.vm.network = "node1"
+    machine.vm.hostname = "node1"
     machine.vm.network "private_network", ip: "10.10.10.100"
   end
 
   # config.vm.define "node2" do |machine|
+  #   machine.vm.hostname = "node2"
   #   machine.vm.network "private_network", ip: "10.10.10.101"
   # end
 
-  
 end
