@@ -1,0 +1,6 @@
+vagrant-certificates (2.0.0, global)
+vagrant-disksize (0.1.3, global)
+vagrant-proxyconf (2.0.10, global)
+vagrant-reload (0.0.1, global)
+vagrant-timezone (1.3.0, global)
+vagrant-vbguest (0.30.0, global)

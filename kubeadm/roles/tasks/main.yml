@@ -1,0 +1,8 @@
+# TODO:
+# https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+# Let iptables see bridged traffic
+
+# Install a container runtime (we'll use docker for this project)
+
+# Use the package manager to install kubeadm, kubectl, kubectl
