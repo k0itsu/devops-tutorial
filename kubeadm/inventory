@@ -3,3 +3,7 @@
 
 [nodes]
 10.10.10.100
+
+[kubernetes:children]
+controlplane
+nodes
