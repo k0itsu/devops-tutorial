@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
   # config.vbguest.installer_options = { allow_kernel_upgrade: true }
 
   config.vm.define "ansible" do |machine|
+    machine.vm.hostname = "ansible"
     machine.vm.network "private_network", ip: "10.10.10.10"
     machine.vm.provision "shell", path: "scripts/ansible.sh"
     # machine.vm.provision :ansible_local do |ansible|
@@ -27,10 +28,12 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "controlplane" do |machine|
+    machine.vm.network = "controlplane"
     machine.vm.network "private_network", ip: "10.10.10.20"
   end
 
   config.vm.define "node1" do |machine|
+    machine.vm.network = "node1"
     machine.vm.network "private_network", ip: "10.10.10.100"
   end
 
