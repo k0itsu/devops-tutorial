@@ -8,9 +8,11 @@ so I took the opportunity to try and recreate his coursework as best
 as I could.
 
 k3s-ansible playbooks/roles are from https://github.com/k3s-io/k3s-ansible
+* I think we're going to use the digital ocean kubeadm tutorial to springboard from.
 
 vagrant ssh k3s_master to reach the k3s cluster
 make sure to run kubectl commands as sudo
+    * find a way to fix this
 
 TODO:
 - set up k3s using ansible
@@ -20,14 +22,21 @@ TODO:
     > GitLab, DroneCI, SonarQube, etc...
 - Add a way to install the following vagrant plugins if it's not installed
     > vagrant-vbguest
-- The original course builds a box (to save time during re-provisioning).
-  Our version doesn't do this. Might be good to try and replicate building a
-  base box.
 - Add requirements for this project.
     - scripts/ansible.sh : change this to install 2.9.21 explicitly
+- Find better way to handle ssh key copy script
+    ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N ""
+- Digital Ocean is expecting python3, should we install it as part of prereq?
+- Should I have create an ansible user to use for ansible tasks instead of vagrant user?
 
 DONE: 
 - Add hostnames to virtualbox vm's?
+- The original course builds a box (to save time during re-provisioning).
+  Our version doesn't do this. Might be good to try and replicate building a
+  base box.
+    - geerlingguy/centos7 image has new version of guest addons in.
+      This cuts down on the initial provision time.
+
 
 VERSIONS:
 - ansible 2.9.21

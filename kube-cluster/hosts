@@ -1,0 +1,5 @@
+[masters]
+master ansible_host=10.10.10.20
+
+[workers]
+worker1 ansible_host=10.10.10.100

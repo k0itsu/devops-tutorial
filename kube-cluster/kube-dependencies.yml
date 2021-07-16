@@ -1,0 +1,69 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Disable system swap
+      shell: "swapoff -a"
+
+    - name: Make sure the br_netfilter module is loaded
+      get_url:
+        url:
+        dest: /etc/modules-load.d/k8s.conf
+
+    - name: add Kubernetes Repo
+      yum_repository:
+        name: Kubernetes
+        description: Kubernetes Repo
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+        enabled: yes
+        gpgcheck: yes
+        repo_gpgcheck: yes
+        gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+    - name: add Docker Repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+
+    - name: install yum-utils as per docker install guide
+      yum:
+        name: yum-utils
+        state: present
+
+    - name: install Docker
+      yum:
+        name: 
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+
+    - name: start Docker service
+      service:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: install kubelet
+      yum:
+        name: kubelet
+        state: present
+        update_cache: true
+
+    - name: start kubelet service
+      service:
+        name: kubelet
+        enabled: yes
+        state: started
+
+    - name: install kubeadm
+      yum:
+        name: kubeadm
+        state: present
+
+- hosts: master
+  become: yes
+  tasks:
+    - name: install kubectl
+      yum:
+        name: kubectl
+        state: present

@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "geerlingguy/centos7"
   config.vm.box_version = "1.2.25"
   
-  config.vm.synced_folder ".", "/vagrant"
+  # config.vm.synced_folder ".", "/vagrant"
   
   # This shell script will copy the public and private key for ansible
   config.vm.provision "shell", path: "scripts/ssh_script.sh"
