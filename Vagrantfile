@@ -23,6 +23,9 @@ Vagrant.configure("2") do |config|
   config.vm.define "controlplane" do |machine|
     machine.vm.hostname = "controlplane"
     machine.vm.network "private_network", ip: "10.10.10.20"
+    machine.vm.provider :virtualbox do |vb|
+      vb.memory = 2048
+    end
   end
 
   config.vm.define "node1" do |machine|

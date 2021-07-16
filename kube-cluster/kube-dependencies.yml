@@ -6,8 +6,16 @@
 
     - name: Make sure the br_netfilter module is loaded
       get_url:
-        url:
+        url: https://raw.githubusercontent.com/k0itsu/devops-tutorial/main/kube-cluster/required_files/br_netfilter.conf
         dest: /etc/modules-load.d/k8s.conf
+
+    - name: ensure iptables can see bridged traffic
+      get_url:
+        url: https://raw.githubusercontent.com/k0itsu/devops-tutorial/main/kube-cluster/required_files/iptables.conf
+        dest: /etc/sysctl.d/k8s.conf
+
+    - name: Read new values from system directories
+      shell: "sysctl --system"
 
     - name: add Kubernetes Repo
       yum_repository:
@@ -36,6 +44,11 @@
           - docker-ce-cli
           - containerd.io
         state: present
+
+    - name: Configure the docker daemon to use systemd for container cgroup mgmt
+      get_url:
+        url: https://raw.githubusercontent.com/k0itsu/devops-tutorial/main/kube-cluster/required_files/docker-daemon.json
+        dest: /etc/docker/daemon.json
 
     - name: start Docker service
       service:
