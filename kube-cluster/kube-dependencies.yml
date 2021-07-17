@@ -4,6 +4,16 @@
     - name: Disable system swap
       shell: "swapoff -a"
 
+    - name: Install libselinux-python3
+      yum:
+        name: libselinux-python3
+        state: present
+    
+    - name: install yum-utils as per docker install guide
+      yum:
+        name: yum-utils
+        state: present
+
     - name: Make sure the br_netfilter module is loaded
       get_url:
         url: https://raw.githubusercontent.com/k0itsu/devops-tutorial/main/kube-cluster/required_files/br_netfilter.conf
@@ -32,11 +42,6 @@
         url: https://download.docker.com/linux/centos/docker-ce.repo
         dest: /etc/yum.repos.d/docker-ce.repo
 
-    - name: install yum-utils as per docker install guide
-      yum:
-        name: yum-utils
-        state: present
-
     - name: install Docker
       yum:
         name: 
@@ -44,6 +49,12 @@
           - docker-ce-cli
           - containerd.io
         state: present
+
+    - name: create /etc/docker folder
+      file:
+        path: /etc/docker
+        state: directory
+        mode: 0755
 
     - name: Configure the docker daemon to use systemd for container cgroup mgmt
       get_url:

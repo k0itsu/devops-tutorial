@@ -2,16 +2,11 @@
   become: yes
   tasks:
     - name: initialize the cluster
-      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 >> cluster_initialized.txt
-      args:
-        chdir: $HOME
-        creates: cluster_initialized.txt
+      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 >> /home/vagrant/cluster_initialized.txt
 
     - name: create .kube directory
-      become: yes
-      # become_user: ubuntu
       file:
-        path: $HOME/.kube
+        path: /home/vagrant/.kube
         state: directory
         mode: 0755
 
@@ -22,10 +17,17 @@
         remote_src: yes
         owner: vagrant
 
-    - name: install Pod network
+    - name: get flannel yml file
+      get_url:
+        url: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+        dest: /home/vagrant/kube-flannel.yml
+    
+    - name: install flannel Pod network
       become: yes
-      # become_user: ubuntu
-      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml >> pod_network_setup.txt
-      args: 
-        chdir: $HOME
-        creates: pod_network_setup.txt
+      become_user: vagrant
+      shell: kubectl apply -f /home/vagrant/kube-flannel.yml
+    
+    # - name: install Pod network
+    #   k8s:
+    #     src: /home/vagrant/kube-flannel.yml
+    #     state: present
