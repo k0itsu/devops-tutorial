@@ -1,8 +1,0 @@
----
-- name: MyTask
-  hosts: all
-  tasks:
-    - name: let iptables see bridged traffic
-      raw: cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf br_netfilter EOF
-      args:
-        executable: /bin/bash

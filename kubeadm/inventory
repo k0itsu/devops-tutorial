@@ -1,9 +1,0 @@
-[controlplane]
-10.10.10.20
-
-[nodes]
-10.10.10.100
-
-[kubernetes:children]
-controlplane
-nodes
