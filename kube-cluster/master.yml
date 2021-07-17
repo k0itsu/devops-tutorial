@@ -2,7 +2,7 @@
   become: yes
   tasks:
     - name: initialize the cluster
-      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 >> /home/vagrant/cluster_initialized.txt
+      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.10.10.20 >> /home/vagrant/cluster_initialized.txt
 
     - name: create .kube directory
       file:

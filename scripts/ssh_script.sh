@@ -10,5 +10,5 @@ chown -R vagrant:vagrant /home/vagrant/.ssh
 chmod 644 /home/vagrant/.ssh/authorized_keys
 chmod 600 /home/vagrant/.ssh/id_rsa
 
-yum update -y
-yum install -y python3
+# yum update -y
+# yum install -y python3

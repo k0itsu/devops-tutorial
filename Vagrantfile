@@ -31,6 +31,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "node1" do |machine|
     machine.vm.hostname = "node1"
     machine.vm.network "private_network", ip: "10.10.10.100"
+    # add memory to node1
   end
 
   # config.vm.define "node2" do |machine|
