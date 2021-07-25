@@ -3,3 +3,4 @@ master ansible_host=10.10.10.20
 
 [workers]
 worker1 ansible_host=10.10.10.100
+worker2 ansible_host=10.10.10.101
