@@ -7,8 +7,8 @@ Trying to run his vagrant config on my home machine wouldn't work,
 so I took the opportunity to try and recreate his coursework as best
 as I could.
 
-k3s-ansible playbooks/roles are from https://github.com/k3s-io/k3s-ansible
-* I think we're going to use the digital ocean kubeadm tutorial to springboard from.
+kubeadm ansible install are a modified version of digital ocean's tutorial:
+https://www.digitalocean.com/community/tutorials/how-to-create-a-kubernetes-cluster-using-kubeadm-on-ubuntu-18-04
 
 vagrant ssh k3s_master to reach the k3s cluster
 make sure to run kubectl commands as sudo
@@ -23,8 +23,9 @@ TODO:
     - scripts/ansible.sh : change this to install 2.9.21 explicitly
 - Find better way to handle ssh key copy script
     ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N ""
+- Add check for kubeadm init and join command if it already ran.
+- halting seems to break the cluster. use vagrant suspend.
 
-- Should I have create an ansible user to use for ansible tasks instead of vagrant user?
 
 DONE: 
 - Add hostnames to virtualbox vm's?
