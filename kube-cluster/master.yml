@@ -17,17 +17,23 @@
         remote_src: yes
         owner: vagrant
 
-    - name: get flannel yml file
-      get_url:
-        url: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-        dest: /home/vagrant/kube-flannel.yml
+    # - name: get flannel yml file
+    #   get_url:
+    #     url: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+    #     dest: /home/vagrant/kube-flannel.yml
     
+    # - name: install flannel Pod network
+    #   become: yes
+    #   become_user: vagrant
+    #   shell: kubectl apply -f /home/vagrant/kube-flannel.yml
+
     - name: install flannel Pod network
       become: yes
       become_user: vagrant
-      shell: kubectl apply -f /home/vagrant/kube-flannel.yml
+      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+    - name: install kubernetes dashboard
+      become: yes
+      become_user: vagrant
+      shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
     
-    # - name: install Pod network
-    #   k8s:
-    #     src: /home/vagrant/kube-flannel.yml
-    #     state: present

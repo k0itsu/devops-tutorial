@@ -15,8 +15,8 @@
 - hosts: workers
   become: yes
   tasks:
-    - name: Print the join command
-      debug: var=hostvars['master'].join_command
+    # - name: Print the join command
+    #   debug: var=hostvars['master'].join_command
 
     - name: join cluster
       shell: "{{ hostvars['master'].join_command }}"
