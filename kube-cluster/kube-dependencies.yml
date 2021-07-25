@@ -1,6 +1,13 @@
 - hosts: all
   become: yes
   tasks:
+    # - name: disable selinux
+    #   selinux:
+    #     state: disabled
+
+    # - name: reboot for selinux disable to take effect
+    #   reboot:
+
     - name: Disable system swap
       shell: "swapoff -a"
 
