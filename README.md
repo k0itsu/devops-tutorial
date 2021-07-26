@@ -4,28 +4,29 @@ This is based off hands-on-Devops course located at
 https://github.com/nemonik/hands-on-DevOps
 
 Trying to run his vagrant config on my home machine wouldn't work,
-so I took the opportunity to try and recreate his coursework as best
-as I could.
+so I took the opportunity to try and recreate his environment
+as a learning process.
 
 kubeadm ansible install are a modified version of digital ocean's tutorial:
 https://www.digitalocean.com/community/tutorials/how-to-create-a-kubernetes-cluster-using-kubeadm-on-ubuntu-18-04
 
-vagrant ssh k3s_master to reach the k3s cluster
-make sure to run kubectl commands as sudo
-    * find a way to fix this
+VERSIONS:
+- ansible 2.9.21
+- vagrant 2.2.16
+- virtualbox 6.2.22
+
+NOTE:
+vagrant halt breaks the cluster. use vagrant suspend.
 
 TODO:
 - import ansible playbooks to install:
     > GitLab, DroneCI, SonarQube, etc...
-- Add a way to install the following vagrant plugins if it's not installed
-    > vagrant-vbguest
 - Add requirements for this project.
     - scripts/ansible.sh : change this to install 2.9.21 explicitly
 - Find better way to handle ssh key copy script
     ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N ""
 - Add check for kubeadm init and join command if it already ran.
-- halting seems to break the cluster. use vagrant suspend.
-
+- Create a sample 3-tier application to practice ci/cd with.
 
 DONE: 
 - Add hostnames to virtualbox vm's?
@@ -41,8 +42,3 @@ DONE:
     as a template to create kubeadm cluster ansible scripts
 - Digital Ocean is expecting python3, should we install it as part of prereq?
     *** there was an issue with ansible modules using python3 in centos, using python2 for now.
-
-VERSIONS:
-- ansible 2.9.21
-- vagrant 2.2.16
-- virtualbox 6.2.22
