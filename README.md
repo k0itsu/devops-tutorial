@@ -18,7 +18,7 @@ VERSIONS:
 NOTE:
 vagrant halt breaks the cluster. use vagrant suspend.
 
-TODO:
+# TODO:
 - import ansible playbooks to install:
     > GitLab, DroneCI, SonarQube, etc...
 - Add requirements for this project.
@@ -29,7 +29,7 @@ TODO:
 - Create a sample 3-tier application to practice ci/cd with.
 - refactor ansible playbooks to use roles and templates.
 
-DONE: 
+# DONE: 
 - Add hostnames to virtualbox vm's?
 - The original course builds a box (to save time during re-provisioning).
   Our version doesn't do this. Might be good to try and replicate building a
@@ -45,11 +45,11 @@ DONE:
     *** there was an issue with ansible modules using python3 in centos, using python2 for now.
 
 
-INSTRUCTIONS:
+# INSTRUCTIONS:
 spin up the virtual machines with:
-'''
+"""
 vagrant up
-'''
+"""
 
 This will deploy 4 centos7 vms.
 - controlplane : k8s controlplane/master node
@@ -58,15 +58,16 @@ This will deploy 4 centos7 vms.
 - ansible: ansible machine to provision the k8s cluster and other add-on apps
 
 After vagrant does its thing, ssh into the ansible vm with:
-'''
+"""
 vagrant ssh ansible
-'''
+"""
 
 # TODO: ADD playbook instructions for deploying k8s
 
 
-FAQ:
+# FAQ:
 - Why centos?
+
 Why not? hahah. While working through a kubernetes course (from kodekloud), the labs were
 using a version of centos. Quick google searches led to a lot tutorials of setting up k8s
 with ansible on ubuntu machines. I figured, there's proof in the labs that an automated
@@ -74,6 +75,7 @@ deploy of k8s on centos is possible, so why don't I try to do it myself by follo
 ubuntu tutorials. This line of thinking leads to...
 
 - Why is everything not one-click automated?
+
 I wanted this project to highlight the learning process I went through to set up the this
 project. My hopes are that a prospective employer will look at this and see a person that is
 on the path to be a competent devops engineer, at the same time, anyone who is also on this
