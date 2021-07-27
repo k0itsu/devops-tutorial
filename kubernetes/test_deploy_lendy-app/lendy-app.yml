@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lendy-app-deployment
+  labels:
+    app: lendy-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lendy-app
+  template:
+    metadata:
+      labels:
+        app: lendy-app
+    spec:
+      containers:
+      - name: lendy
+        image: k0itsu/lendy-app-demo
+        ports:
+        - containerPort: 5000
