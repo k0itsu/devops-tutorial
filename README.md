@@ -79,4 +79,4 @@ ubuntu tutorials. This line of thinking leads to...
 I wanted this project to highlight the learning process I went through to set up the this
 project. My hopes are that a prospective employer will look at this and see a person that is
 on the path to be a competent devops engineer, at the same time, anyone who is also on this
-path can follow along with the commit history/logs and learn the very basics of some of the devops engineering toolbelt out there.
+path can follow along with the commit history/logs and learn the very basics of some of the devops engineering toolbelt.
