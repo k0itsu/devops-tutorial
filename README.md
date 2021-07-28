@@ -19,6 +19,12 @@ NOTE:
 vagrant halt breaks the cluster. use vagrant suspend.
 
 # TODO:
+- Before starting lendy-app improvements, add jenkins to demonstrate ci/cd
+  - lendy-app improvements:
+    - move the sqlite server to a different docker container
+    - add user registration
+- use k8s to deploy jenkins
+- Add secrets management to ci/cd pipeline
 - import ansible playbooks to install:
     > GitLab, DroneCI, SonarQube, etc...
 - Add requirements for this project.
