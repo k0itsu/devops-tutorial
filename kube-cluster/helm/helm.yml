@@ -1,0 +1,18 @@
+- hosts: master
+  become: yes
+  become_user: vagrant
+  gather_facts: false
+  tasks:
+    # https://helm.sh/docs/intro/install/
+    - name: download helm script
+      get_url:
+        url: https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+        dest: /home/vagrant/get_helm.sh
+    
+    - name: change script mode
+      file:
+        path: /home/vagrant/get_helm.sh
+        mode: '0700'
+
+    - name: install helm using script
+      shell: /home/vagrant/get_helm.sh

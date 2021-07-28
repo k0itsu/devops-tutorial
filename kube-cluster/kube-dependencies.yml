@@ -8,9 +8,6 @@
     # - name: reboot for selinux disable to take effect
     #   reboot:
 
-    - name: Disable system swap
-      shell: "swapoff -a"
-
     # - name: Install libselinux-python3
     #   yum:
     #     name: libselinux-python3
@@ -20,6 +17,10 @@
     #   yum:
     #     name: yum-utils
     #     state: present
+
+    # These are part of the kubeadm requirements
+    - name: Disable system swap
+      shell: "swapoff -a"
 
     - name: Make sure the br_netfilter module is loaded
       get_url:
