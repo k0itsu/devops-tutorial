@@ -15,8 +15,7 @@ VERSIONS:
 - vagrant 2.2.16
 - virtualbox 6.2.22
 
-NOTE:
-vagrant halt breaks the cluster. use vagrant suspend.
+
 
 # TODO:
 - Before starting lendy-app improvements, add jenkins to demonstrate ci/cd
@@ -34,6 +33,11 @@ vagrant halt breaks the cluster. use vagrant suspend.
 - Add check for kubeadm init and join command if it already ran.
 - Create a sample 3-tier application to practice ci/cd with.
 - refactor ansible playbooks to use roles and templates.
+- add-on ansible packages for:
+  - dashboard
+  - jenkins
+
+
 
 # DONE: 
 - Add hostnames to virtualbox vm's?
@@ -53,9 +57,11 @@ vagrant halt breaks the cluster. use vagrant suspend.
 
 # INSTRUCTIONS:
 spin up the virtual machines with:
-"""
-vagrant up
-"""
+`vagrant up`
+
+
+# NOTE:
+`vagrant halt` breaks the cluster. use `vagrant suspend`.
 
 This will deploy 4 centos7 vms.
 - controlplane : k8s controlplane/master node
@@ -64,9 +70,7 @@ This will deploy 4 centos7 vms.
 - ansible: ansible machine to provision the k8s cluster and other add-on apps
 
 After vagrant does its thing, ssh into the ansible vm with:
-"""
-vagrant ssh ansible
-"""
+`vagrant ssh ansible`
 
 # TODO: ADD playbook instructions for deploying k8s
 
@@ -74,15 +78,15 @@ vagrant ssh ansible
 # FAQ:
 - Why centos?
 
-Why not? hahah. While working through a kubernetes course (from kodekloud), the labs were
-using a version of centos. Quick google searches led to a lot tutorials of setting up k8s
-with ansible on ubuntu machines. I figured, there's proof in the labs that an automated
-deploy of k8s on centos is possible, so why don't I try to do it myself by following the
-ubuntu tutorials. This line of thinking leads to...
+Why not? hahah. While working through a kubernetes course (from kodekloud), the labs were using a version of centos.
+Quick google searches led to a lot tutorials of setting up k8s with ansible on ubuntu machines. 
+I figured, there's proof in the labs that an automated deploy of k8s on centos is possible, 
+so why don't I try to do it myself using the ubuntu tutorials as a base. 
+This line of thinking leads to...
+
 
 - Why is everything not one-click automated?
 
-I wanted this project to highlight the learning process I went through to set up the this
-project. My hopes are that a prospective employer will look at this and see a person that is
-on the path to be a competent devops engineer, at the same time, anyone who is also on this
-path can follow along with the commit history/logs and learn the very basics of some of the devops engineering toolbelt.
+I wanted this project to highlight the learning process I went through to set up the this project.
+My hopes are that a prospective employer will look at this and see a person that is on the path to be competent devops engineer,
+at the same time, anyone who is also on this path can follow along with the commit history/logs and learn the very basics of some of the devops tools.
