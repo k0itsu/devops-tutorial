@@ -72,8 +72,15 @@ This will deploy 4 centos7 vms.
 After vagrant does its thing, ssh into the ansible vm with:
 `vagrant ssh ansible`
 
-# TODO: ADD playbook instructions for deploying k8s
+inside the ansible vm run the following playbooks
+`cd /vagrant/kube-cluster`
+`ansible-playbook kube-dependencies.yml master.yml workers.yml`
 
+TODO: ADD-ONS INSTRUCTIONS
+
+TODO: DEPLOYMENT AND NODEPORT DEMO INSTRUCTIONS
+
+TODO: USING JENKINS FOR CI/CD WHILE WE MAKE IMPROVEMENTS TO LENDY-APP
 
 # FAQ:
 - Why centos?
