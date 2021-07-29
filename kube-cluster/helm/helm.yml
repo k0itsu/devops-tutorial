@@ -20,5 +20,10 @@
         src: /home/vagrant/linux-amd64/helm
         dest: /usr/local/bin/helm
         remote_src: yes
+
+    - name: make helm executable
+      file: 
+        path: /usr/local/bin/helm
+        mode: '0555'
     # - name: install helm using script
     #   shell: /home/vagrant/get_helm.sh
