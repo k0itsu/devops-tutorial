@@ -1,18 +1,24 @@
 - hosts: master
   become: yes
-  become_user: vagrant
+  # become_user: vagrant
   gather_facts: false
   tasks:
     # https://helm.sh/docs/intro/install/
-    - name: download helm script
-      get_url:
-        url: https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-        dest: /home/vagrant/get_helm.sh
+    # - name: download helm binary tarball
+    #   get_url:
+    #     url: https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
+    #     dest: /home/vagrant/helm-v3.6.3-linux-amd64.tar.gz
     
-    - name: change script mode
-      file:
-        path: /home/vagrant/get_helm.sh
-        mode: '0700'
+    - name: get helm binary
+      unarchive:
+        src: https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
+        dest: /home/vagrant/
+        remote_src: yes
 
-    - name: install helm using script
-      shell: /home/vagrant/get_helm.sh
+    - name: move helm binary to /usr/local/bin/
+      copy:
+        src: /home/vagrant/linux-amd64/helm
+        dest: /usr/local/bin/helm
+        remote_src: yes
+    # - name: install helm using script
+    #   shell: /home/vagrant/get_helm.sh
