@@ -1,6 +1,5 @@
 - hosts: master
   become: yes
-  # become_user: vagrant
   gather_facts: false
   tasks:
     # https://helm.sh/docs/intro/install/
@@ -24,6 +23,12 @@
     - name: make helm executable
       file: 
         path: /usr/local/bin/helm
-        mode: '0555'
+        mode: '0755'
     # - name: install helm using script
     #   shell: /home/vagrant/get_helm.sh
+
+    - name: Create a symbolic link for helm
+      file:
+        src: /usr/local/bin/helm
+        dest: /usr/bin/helm
+        state: link
