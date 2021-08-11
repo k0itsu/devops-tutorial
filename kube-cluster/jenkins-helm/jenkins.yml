@@ -1,0 +1,82 @@
+# Prereqs:
+# - helm
+- hosts: master
+  become: yes
+  become_user: vagrant
+  gather_facts: false
+  vars:
+    chart: jenkinsci/jenkins
+    admin_password_jsonpath: "{.data.jenkins-admin-password}"
+    node_port_jsonpath: "{.spec.ports[0].nodePort}"
+    node_ip_jsonpath: "{.items[0].status.addresses[0].address}"
+  tasks:
+    # - name: create new namespace for jenkins
+    #   shell: kubectl create namespace jenkins
+
+    # - name: Add jenkins repo for helm
+    #   shell: helm repo add jenkinsci https://charts.jenkins.io
+
+    # - name: Update repo
+    #   shell: helm repo update
+
+    # - name: Get jenkins persistent volume definition file
+    #   get_url:
+    #     url: https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-volume.yaml
+    #     dest: /home/vagrant/jenkins-volume.yaml
+
+    # - name: Apply pv definition file
+    #   shell: 
+    #     cmd: kubectl apply -f jenkins-volume.yaml
+    #     chdir: /home/vagrant/
+
+    # - name: Get jenkins service account/role definition file
+    #   get_url:
+    #     url: https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-sa.yaml
+    #     dest: /home/vagrant/jenkins-sa.yaml
+
+    # - name: Apply service account/role definition file
+    #   shell: 
+    #     cmd: kubectl apply -f jenkins-sa.yaml
+    #     chdir: /home/vagrant/
+
+    # - name: test helm
+    #   shell: which helm
+    #   register: helm_result
+
+    # - name: test helm - output
+    #   debug:
+    #    var: helm_result
+
+    - name: Install jenkins via helm
+      shell: 
+        cmd: helm install jenkins -n jenkins -f jenkins-values.yml {{ chart }}
+        chdir: /vagrant/kube-cluster/jenkins-helm
+
+    - name: Get 'admin' user password
+      block:
+        - name: Get 'admin' user password
+          shell: kubectl get secret -n jenkins jenkins -o jsonpath={{ admin_password_jsonpath }}
+          register: admin_password
+
+        - name: decode 'admin' user password
+          shell: echo '{{ admin_password.stdout }}' | base64 --decode
+          register: admin_password_decoded
+    
+        - name: admin password
+          debug:
+            msg: "The Jenkins admin password is : {{ admin_password_decoded.stdout }}"
+
+    - name: Get Jenkins URL
+      block:
+        - shell: kubectl get -n jenkins -o jsonpath={{ node_port_jsonpath }} services jenkins
+          register: NODE_PORT
+
+        - shell: kubectl get nodes -n jenkins -o jsonpath={{ node_ip_jsonpath }}
+          register: NODE_IP
+
+        - name: show the URL
+          debug:
+            msg: "http://{{ NODE_IP.stdout }}:{{ NODE_PORT.stdout }}/login"
+
+    # - name: hostvars
+    #   debug: var=hostvars['master'].ansible_host
