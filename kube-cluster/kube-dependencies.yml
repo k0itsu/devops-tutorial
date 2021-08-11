@@ -1,12 +1,12 @@
 - hosts: all
   become: yes
   tasks:
-    # - name: disable selinux
-    #   selinux:
-    #     state: disabled
+    - name: disable selinux
+      selinux:
+        state: disabled
 
-    # - name: reboot for selinux disable to take effect
-    #   reboot:
+    - name: reboot for selinux disable to take effect
+      reboot:
 
     # - name: Install libselinux-python3
     #   yum:
@@ -68,6 +68,17 @@
       get_url:
         url: https://raw.githubusercontent.com/k0itsu/devops-tutorial/main/kube-cluster/required_files/docker-daemon.json
         dest: /etc/docker/daemon.json
+
+    - name: Make sure docker group exists
+      group:
+        name: docker
+        state: present
+
+    - name: add vagrant to docker group
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
 
     - name: start Docker service
       service:

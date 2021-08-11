@@ -1,4 +1,4 @@
-- hosts: master
+- hosts: masters
   become: yes
   gather_facts: false
   tasks:
@@ -17,6 +17,19 @@
         dest: /home/vagrant/.kube/config
         remote_src: yes
         owner: vagrant
+        mode: 0600
+
+    - name: add nodeip for kubelet
+      lineinfile:
+        path: /etc/sysconfig/kubelet
+        regexp: '^KUBELET_EXTRA_ARGS='
+        line: KUBELET_EXTRA_ARGS=--node-ip={{ hostvars[inventory_hostname]['ansible_host'] }}
+
+    - name: reload systemd daemon && restart kubelet
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        name: kubelet
 
     - name: get flannel yml file
       get_url:
@@ -32,3 +45,13 @@
       become: yes
       become_user: vagrant
       shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+    
+  
+    # - name: print debug
+    #   debug: var=hostvars
+            #  var=hostvars[inventory_hostname]["ansible_host"]
+
+    # - name: print debug
+    #   debug: 
+    #     msg: IP ADDRESS - {{ hostvars[inventory_hostname]['ansible_host'] }}
+
