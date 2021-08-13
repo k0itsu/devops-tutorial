@@ -3,7 +3,7 @@
   gather_facts: false
   tasks:
     - name: initialize the cluster
-      shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.10.10.20 >> /home/vagrant/cluster_initialized.txt
+      shell: kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=10.10.10.20 >> /home/vagrant/cluster_initialized.txt
 
     - name: create .kube directory
       file:
@@ -31,22 +31,33 @@
         daemon_reload: yes
         name: kubelet
 
-    - name: get flannel yml file
-      get_url:
-        url: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-        dest: /home/vagrant/kube-flannel.yml
+    # - name: get flannel yml file
+    #   get_url:
+    #     url: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+    #     dest: /home/vagrant/kube-flannel.yml
     
-    - name: install flannel Pod network
-      become: yes
-      become_user: vagrant
-      shell: kubectl apply -f /home/vagrant/kube-flannel.yml
+    # - name: install flannel Pod network
+    #   become: yes
+    #   become_user: vagrant
+    #   shell: kubectl apply -f /home/vagrant/kube-flannel.yml
 
-    - name: install flannel Pod network
+    # - name: install flannel Pod network
+    #   become: yes
+    #   become_user: vagrant
+    #   shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+    
+    # - name: get calico yml file
+    #   get_url:
+    #     url: https://docs.projectcalico.org/manifests/calico.yaml
+    #     dest: /home/vagrant/calico.yml
+
+    - name: install calico
       become: yes
       become_user: vagrant
-      shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-    
-  
+      shell:
+        cmd: kubectl create -f https://docs.projectcalico.org/manifests/calico.yaml
+        chdir: /home/vagrant
+
     # - name: print debug
     #   debug: var=hostvars
             #  var=hostvars[inventory_hostname]["ansible_host"]
