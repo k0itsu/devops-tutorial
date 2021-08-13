@@ -18,3 +18,15 @@
 
     - name: join cluster
       shell: "{{ hostvars['master'].join_command }}"
+
+    - name: add nodeip for kubelet
+      lineinfile:
+        path: /etc/sysconfig/kubelet
+        regexp: '^KUBELET_EXTRA_ARGS='
+        line: KUBELET_EXTRA_ARGS=--node-ip={{ hostvars[inventory_hostname]['ansible_host'] }}
+
+    - name: reload systemd daemon && restart kubelet
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        name: kubelet
