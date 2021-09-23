@@ -36,6 +36,8 @@ VERSIONS:
 - add-on ansible packages for:
   - dashboard
   - jenkins
+  - prometheus
+  - grafana
 
 
 
